@@ -1,17 +1,13 @@
-MOMA Pipeline Project. 
+MOMA Pipeline Project:
+Finished Product is in final_pipeline folder. The three other folders represent the 3 scripts that were written and merged to form the final script.
 
-To use get_clusters.py
+to use: MOMA_clusters_preds.py, here is the documentation.
+MOMA_clusters_preds.py <cluster #> <cluster_file>.json <input_data>.csv <neuralnetwork>.h5 <output_name>.csv
 
-python get_clusters.py <cluster_data.json> <1> .... <cluster no.#> <output.csv>
-cluster data: name of json file with data.
-output: desired name of output file.
+an example I have been using:
 
-To use merge_data.py
+MOMA_clusters_preds.py <cluster #> test_sample.json test_sample1.csv modified_updated_alldata2023-TIC30filtered_Model1Dap2022_sample_7.h5 cluster_{#}_sample_predictions.csv
 
-The args should be: <merge_data.py> <script.csv> <script2.csv> <outputScript.csv>
-script.csv: TID's and clusters that will get their MOMA data
-script2.csv: MOMA data that will be matched with script.csv
-outputScript.csv: merged data output.
+Note: Training model must contain the label type within the name, separated from other chars using _ _. ex "blablabla_sample_bla". Also, this pipeline is only modeled to look at category or sample data, so if wanted to addapt to other "label_types", update the encode_labels function to include the new lable.
 
-Note: if there is no MOMA data to match with a given TID in script.csv, result will be NAN for those entries
-
+Also note: if you reuse the same output file name as the last time it was run then new data won't be overwritten, it simply will not be output.
