@@ -262,14 +262,25 @@ def make_predictions(cluster, neural_network, output, training_data):
 
     ## Step 4: Label Encoding: By matching labels from the testing data used for these NN, the NN can correctly label the prediction to the correct label#   
     label_set, encoded_testset = encode_labels(label_type, full_datafile, test_datafile) 
-    print(encoded_testset)
+    rev_label_set = {v: k for k, v in label_set.items()}
+
 
     ## NN for Sample Labels: Loading the model and predicting the data
     loaded_model = tf.keras.models.load_model(neural_network, compile = True)
     predictions_loaded_model = loaded_model.predict(ms_normedMax)
     predictions = np.argmax(predictions_loaded_model, axis = 1)
+    #print(predictions)
+    
+    ## Predicted Labels
+    labeled_predictions = []
+    for prediction in predictions:
+        labeled_predictions.append(rev_label_set[prediction])
+    
+    datafile[f'predicted_{label_type}_label'] = labeled_predictions
+    datafile.to_csv("test_output.csv")
 
-    ## Generate Output
+    ## G
+    # enerate Output
     generate_classification_report_test(encoded_testset, predictions, label_set, output)
     
     ## These are sample data to be used for testing ##
