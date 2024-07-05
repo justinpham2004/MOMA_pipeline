@@ -277,7 +277,7 @@ def make_predictions(cluster, neural_network, output, training_data):
         labeled_predictions.append(rev_label_set[prediction])
     
     datafile[f'predicted_{label_type}_label'] = labeled_predictions
-    datafile.to_csv("test_output.csv")
+    datafile.to_csv(f"cluster_{cluster}_{label_type}_predictions.csv")
 
     ## G
     # enerate Output
